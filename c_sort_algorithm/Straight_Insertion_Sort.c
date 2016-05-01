@@ -1,36 +1,39 @@
 #include <stdio.h>
-#define MAX_SIZE 100
-typedef int KeyType;
-typedef struct RecType
-{
-	KeyType key;       //关键字
-	//infoType otherinfo;
-}RecType;
 
-typedef struct
+void InsertSort(int *array, int length )
 {
-	RecType R[MAX_SIZE];
-	int length;
-}Sqlist;
-
-void InsertSort(Sqlist *L)
-{
-	int i,j;
-	for(i = 2; i<=L->length; ++i)
+	int i = 0,j = 0;
+	int temp;
+	for(i = 1; i<length; ++i)
 	{
-		L->R[0] = L->R[i];
+		temp = array[i];
 		j = i-1;
-		while(L->R[0].key<L->R[j].key)
+		while(temp < array[j])
 		{
-			L->R[j+1] = L->R[j];
-			j--;
+				array[j+1] = array[j];
+				--j;
 		}
-		L->R[j+1] = L->R[0];
+		array[j+1] = temp;
 	}
+	
 }
 
 int main(void)
 {
-
+	int i;
+	int a[] = {23,45,5,76,34,56,78,987,23,43};
+	int length = 10;
+	printf("排序之前:\n");
+	for(i = 0; i<10; ++i)
+	{
+		printf("%d  ",a[i]); 
+	}
+	InsertSort(a, length);
+	printf("\n排序之后:\n");
+	for(i = 0; i<10; ++i)
+	{
+		printf("%d  ",a[i]);
+	}
+	printf("\n");
 	return 0;
 }
