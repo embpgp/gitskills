@@ -3,12 +3,12 @@
 void Quit_sort(int *array, int start, int end)
 {
 	int i = start,j = end;
-	int temp = array[i];
-	while(i<j)
+	int temp = array[i];    //restore the var
+	while(i<j)            //find the pos
 	{
 		while(i<j && temp<=array[j])
 			j--;
-		array[i] = array[j];
+		array[i] = array[j];         //
 		while(i<j && array[i]<=temp)
 			i++;
 		array[j] = array[i];
