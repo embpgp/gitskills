@@ -1,3 +1,13 @@
+/*
+*冒泡排序优化版1，记录是否发生交换，如没有，则直接退出 (树莓派 gcc)
+*
+*Copyright (C) 2016
+*
+*2016 5 6
+*
+*GPL
+*/
+
 #include <stdio.h>
 
 /*
@@ -12,6 +22,7 @@ void BubbleSort(int *array, int length)
 	int temp;
 	for(i = length-1; i>0; --i)
 	{
+		exchange = 0;
 		for(j = 0; j<=i-1; ++j)
 			{
 				if(array[j+1] < array[j])
