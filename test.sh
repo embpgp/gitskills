@@ -3,6 +3,8 @@
 commit(){
 	git status
 	sleep 1
+	git pull
+	sleep 1
 	git add *
 	sleep 1
 	git commit -m "sth"
