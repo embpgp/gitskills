@@ -7,6 +7,8 @@
 #
 #author:rutk1t0r
 #
+#Date:2016.08.29
+#
 #GPL
 #
 
@@ -27,7 +29,7 @@ import struct
 import socket
 import commands
 #网卡名称
-iface_name = commands.getstatusoutput("ifconfig | awk '{print $1}' | head -n 1")[1]  #默认取了第一个元祖内容
+iface_name = commands.getstatusoutput("ifconfig | awk '{print $1}' | head -n 1")[1]  #默认取了第一个元组内容
 
 def Verify_account(user_account,user_pass):
 	s = socket.socket()         # 创建 socket 对象
@@ -62,7 +64,7 @@ def Verify_account(user_account,user_pass):
 	s.close()                    #正常的四次挥手~~不过此后貌似还是会有数据包的交互，但是已经认证成功了就没关系了
 
 
-
+#其实用shell命令更快，hostname -I就可以
 def get_local_ip(ifname): 
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
 	inet = fcntl.ioctl(s.fileno(), 0x8915, struct.pack('256s', ifname[:15])) 
@@ -89,12 +91,12 @@ def main():
 	ip_add =  get_local_ip(iface_name)  #网卡名称,一般PC的第一个都是以太网网卡
 	# 第三方 SMTP 服务
 	mail_host="smtp.163.com"  #设置服务器
-	mail_user="username"    #用户名,example
-	mail_pass="password"   #第三方服务口令 ,example
+	mail_user="username"    #用户名,example,或者手机号码
+	mail_pass="password"   #第三方服务口令 ,example，需要开通第三方授权
 
 
 	sender = 'sender_account'  #发送者邮箱号
-	receivers = ['receiver_account']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+	receivers = ['receiver_account']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱，其实都是自己。。。。。发现好像只能发给自己
 
 	message = MIMEText('Python 邮件发送测试...以太网的IP地址：'+ip_add, 'plain', 'utf-8')
 	message['From'] = "send_user"
@@ -104,7 +106,7 @@ def main():
 	message['Subject'] = Header(subject, 'utf-8')
 	
 	if not is_internet():
-		Verify_account('account','passwd')  #!!!
+		Verify_account('account','passwd')  #!!!这里填写校园网账号密码的地方例如：2013********,********
 	try:
 		smtpObj = smtplib.SMTP() 
 		print '[+]smtp对象建立成功!'
