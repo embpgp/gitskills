@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+//between push and pop the data keep the value
 #pragma pack(push, 1)
 
 struct memroy_algin_first
