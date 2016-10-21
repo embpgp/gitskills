@@ -1,7 +1,7 @@
 #!/bin/bash
 
-exec 3< /etc/passwd
-exec 0<&3
+exec 3< /etc/passwd  #let the fd 3 pointer "/etc/passwd"
+exec 0<&3            
 cat
 
 
